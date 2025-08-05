@@ -1,10 +1,11 @@
 ---
-import Layout from "../layouts/Layout.astro";
 import { getEntry } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import { render } from "astro:content";
 
 const privacyPolicy = await getEntry("general", "privacy-policy");
 if (!privacyPolicy) throw new Error("Privacy policy content not found");
-const { Content } = await privacyPolicy.render();
+const { Content } = await render(privacyPolicy);
 ---
 
 <Layout title="Privacy Policy" description="Get a description from Ryan">
@@ -12,3 +13,4 @@ const { Content } = await privacyPolicy.render();
     <Content />
   </article>
 </Layout>
+
