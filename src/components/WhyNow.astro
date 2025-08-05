@@ -1,0 +1,59 @@
+---
+import { BellAlertIcon } from "@heroicons/react/24/solid";
+interface Feature {
+  title: string;
+  description: string;
+}
+
+const features: Feature[] = [
+  {
+    title: "",
+    description:
+      "Prevalence of Mental Health Issues: According to the American College Health Association (ACHA), over 60% of college students reported experiencing overwhelming anxiety, and nearly 40% experienced severe depression in the past year.",
+  },
+  {
+    title: "",
+    description:
+      "Increased Demand for Counseling Services: Many universities are witnessing a surge in demand for counseling services. A survey by the Center for Collegiate Mental Health (CCMH) found that demand for counseling services increased by 41.6% from 2015 to 2020.",
+  },
+  {
+    title: "",
+    description:
+      "Stigma and Help-Seeking: The Healthy Minds Study reported that 57% of college students with significant mental health issues did not seek help in the past year, often due to stigma or lack of knowledge about available resources.",
+  },
+];
+
+const heading = {
+  title: "Why Now?",
+  className:
+    "col-span-2 text-4xl font-semibold tracking-tight text-pretty text-base-900 sm:text-5xl",
+};
+---
+
+<div class="text-base-content py-24 sm:py-32">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div
+      class="mx-auto grid max-w-2xl grid-cols-1 gap-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-5"
+    >
+      <h2 class={heading.className}>{heading.title}</h2>
+      <dl class="col-span-3 grid grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2">
+        {
+          features.map(({ title, description }) => (
+            <div>
+              <dt class="text-base/7 font-semibold text-base-900">
+                <div class="mb-6 flex size-10 items-center justify-center rounded-lg border-2 border-primary">
+                  <BellAlertIcon
+                    className="size-6 text-primary"
+                    aria-hidden="true"
+                  />
+                </div>
+                {title}
+              </dt>
+              <dd class="mt-1 text-base/7 text-base-600">{description}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </div>
+</div>
