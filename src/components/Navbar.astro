@@ -1,0 +1,103 @@
+---
+import { Image } from "astro:assets";
+import HeaderLink from "./HeaderLink.astro";
+import logo from "../assets/icon-no-text.png";
+
+const menuLinks = [
+  { href: "/", text: "Home" },
+  { href: "/privacy-policy", text: "Privacy" },
+];
+---
+
+<div class="flex flex-col">
+  <header
+    class="flex items-center justify-between p-4 transition-all duration-300 bg-white"
+  >
+    <a href="/" class="flex pl-2 lg:pl-8 items-center">
+      <Image class="w-12 h-12 mr-4" src={logo} alt="Icon" loading="eager" />
+    </a>
+
+    <nav class="hidden lg:flex items-center space-x-6">
+      <ul class="flex space-x-6 text-primary">
+        {
+          menuLinks.map((link) => (
+            <HeaderLink href={link.href}>{link.text}</HeaderLink>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <button data-mobile-menu-btn class="lg:hidden pr-2 block"
+      ><svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-6 h-6 cursor-pointer md:hidden block"
+        id="lines"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M3.75 9h16.5m-16.5 6.75h16.5"></path>
+      </svg>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-6 h-6 cursor-pointer md:hidden hidden"
+        id="close"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M6.75 6.75l10.5 10.5m0-10.5L6.75 17.25"></path>
+      </svg>
+    </button>
+  </header>
+  <nav
+    id="mobile-nav"
+    class="bg-white text-primary p-4 z-10 hidden transition-all duration-300"
+  >
+    <ul class="flex flex-col space-y-4 text-primary">
+      {
+        menuLinks.map((link) => (
+          <li class="w-full pb-2 border-b border-primary transition-all duration-300">
+            <a href={link.href} class="hover:text-secondary">
+              {link.text}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</div>
+<script>
+  function showMenu(): void {
+    const menu = document.getElementById("mobile-nav");
+    menu?.classList.toggle("hidden");
+    menu?.classList.toggle("flex");
+    menu?.classList.toggle("flex-col");
+
+    const hamburger = document.getElementById("lines");
+    const close = document.getElementById("close");
+    hamburger?.classList.toggle("hidden");
+    close?.classList.toggle("hidden");
+  }
+
+  function addListeners(): void {
+    const menus = document.querySelectorAll("[data-mobile-menu-btn]");
+
+    menus.forEach((menu) =>
+      menu.addEventListener("click", () => {
+        showMenu();
+      })
+    );
+  }
+
+  document.addEventListener("astro:after-swap", addListeners);
+  addListeners();
+</script>
