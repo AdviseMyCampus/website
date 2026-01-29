@@ -25,5 +25,8 @@
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.16",
     "daisyui": "^5.0.50"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
