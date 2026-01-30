@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import HeaderLink from "./HeaderLink.astro";
-import logo from "../assets/icon-no-text.png";
+import logo from "../assets/advise-black-orb.png";
 
 const menuLinks = [
   { href: "/", text: "Home" },
@@ -94,7 +94,7 @@ const menuLinks = [
     menus.forEach((menu) =>
       menu.addEventListener("click", () => {
         showMenu();
-      })
+      }),
     );
   }
 
