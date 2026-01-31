@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import HeaderLink from "./HeaderLink.astro";
-import logo from "../assets/advise-black-orb.png";
+import logo from "../assets/advise-black-horizontal.png";
 
 const menuLinks = [
   { href: "/", text: "Home" },
@@ -11,10 +11,15 @@ const menuLinks = [
 
 <div class="flex flex-col">
   <header
-    class="flex items-center justify-between p-4 transition-all duration-300 bg-white"
+    class="fixed top-2 left-1/2 -translate-x-1/2 z-50 flex flex-row items-center justify-between px-2 sm:px-4 py-1 rounded-full shadow-lg bg-white/80 backdrop-blur-md border border-white/30 md:w-[98vw] w-[95vw] transition-all duration-300 md:max-w-7xl"
   >
     <a href="/" class="flex pl-2 lg:pl-8 items-center">
-      <Image class="w-12 h-12 mr-4" src={logo} alt="Icon" loading="eager" />
+      <Image
+        class="h-12 w-auto mr-4 object-contain"
+        src={logo}
+        alt="Icon"
+        loading="eager"
+      />
     </a>
 
     <nav class="hidden lg:flex items-center space-x-6">
