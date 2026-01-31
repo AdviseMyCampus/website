@@ -3,19 +3,24 @@ import { Image } from "astro:assets";
 import HeaderLink from "./HeaderLink.astro";
 import logo from "../assets/advise-black-horizontal.png";
 
-const menuLinks = [
+type MenuLink = {
+  href: string;
+  text: string;
+};
+
+const menuLinks: MenuLink[] = [
   { href: "/", text: "Home" },
   { href: "/privacy-policy", text: "Privacy" },
 ];
 ---
 
-<div class="flex flex-col">
+<div class="flex flex-col w-full">
   <header
-    class="fixed top-2 left-1/2 -translate-x-1/2 z-50 flex flex-row items-center justify-between px-2 sm:px-4 py-1 rounded-full shadow-lg bg-white/80 backdrop-blur-md border border-white/30 md:w-[98vw] w-[95vw] transition-all duration-300 md:max-w-7xl"
+    class="fixed top-2 left-1/2 -translate-x-1/2 z-50 flex flex-row items-center justify-between px-2 sm:px-4 py-1 rounded-full shadow-lg bg-white/70 backdrop-blur-md border border-white/30 md:w-[98vw] w-[95vw] transition-all duration-300 md:max-w-7xl"
   >
-    <a href="/" class="flex pl-2 lg:pl-8 items-center">
+    <a href="/" class="flex pl-2 lg:pl-8 items-center cursor-pointer">
       <Image
-        class="h-12 w-auto mr-4 object-contain"
+        class="h-12 w-auto mr-4 object-contain sm:h-8 mr-2 sm:mr-4"
         src={logo}
         alt="Icon"
         loading="eager"
@@ -23,15 +28,14 @@ const menuLinks = [
     </a>
 
     <nav class="hidden lg:flex items-center space-x-6">
-      <ul class="flex space-x-6 text-primary">
+      <ul class="flex items-center space-x-6 text-foreground">
         {
-          menuLinks.map((link) => (
+          menuLinks.map((link: MenuLink) => (
             <HeaderLink href={link.href}>{link.text}</HeaderLink>
           ))
         }
       </ul>
     </nav>
-
     <button data-mobile-menu-btn class="lg:hidden pr-2 block"
       ><svg
         xmlns="http://www.w3.org/2000/svg"
@@ -59,19 +63,19 @@ const menuLinks = [
         <path
           stroke-linecap="round"
           stroke-linejoin="round"
-          d="M6.75 6.75l10.5 10.5m0-10.5L6.75 17.25"></path>
+          d="M6 18L18 6M6 6l12 12"></path>
       </svg>
     </button>
   </header>
   <nav
     id="mobile-nav"
-    class="bg-white text-primary p-4 z-10 hidden transition-all duration-300"
+    class="bg-white/10 backdrop-blur-xl backdrop-saturate-150 border border-white/20 text-foreground p-2 z-40 fixed top-16 left-1/2 -translate-x-1/2 w-[90vw] max-w-sm rounded-2xl shadow-lg hidden transition-all duration-300"
   >
-    <ul class="flex flex-col space-y-4 text-primary">
+    <ul class="flex flex-col space-y-4 text-foreground">
       {
-        menuLinks.map((link) => (
+        menuLinks.map((link: MenuLink) => (
           <li class="w-full pb-2 border-b border-primary transition-all duration-300">
-            <a href={link.href} class="hover:text-secondary">
+            <a href={link.href} class="hover:text-secondary-foreground block">
               {link.text}
             </a>
           </li>
@@ -81,7 +85,7 @@ const menuLinks = [
   </nav>
 </div>
 <script>
-  function showMenu(): void {
+  function showMenu() {
     const menu = document.getElementById("mobile-nav");
     menu?.classList.toggle("hidden");
     menu?.classList.toggle("flex");
@@ -93,9 +97,8 @@ const menuLinks = [
     close?.classList.toggle("hidden");
   }
 
-  function addListeners(): void {
+  function addListeners() {
     const menus = document.querySelectorAll("[data-mobile-menu-btn]");
-
     menus.forEach((menu) =>
       menu.addEventListener("click", () => {
         showMenu();
